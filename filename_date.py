@@ -2,8 +2,9 @@ import os
 import datetime
 import argparse
 
-argparser = argparse.ArgumentParser(description='Writes creation date into the filename')
-argparser.add_argument("-d", "--date", help="Specify the date in the filename, YYYY-MM-DD")
+argparser = argparse.ArgumentParser(description='Writes date in front of the filename')
+argparser.add_argument("-t", "--today",  help="set the current date", action="store_true")
+argparser.add_argument("-c", "--custom", help="specify the date in the filename, YYYY-MM-DD")
 args = argparser.parse_args()
 
 # Get the name of the current script
@@ -20,13 +21,16 @@ for file in files:
         # filename already has a date
         datetime.datetime.strptime(file[:10], '%Y-%m-%d')
     except:
-        if args.date:
+        if args.today:
+            # get the current date
+            date = str(datetime.datetime.now())[:10]
+        elif args.custom:
             # date specified by the user
-            os.rename(file, args.date + '_' + file)
+            date = args.custom
         else:
             # get the creation date of the file
             creation_time = os.path.getctime(file)
-            creation_date = datetime.datetime.fromtimestamp(creation_time)
-
-            # rename the file
-            os.rename(file, str(creation_date)[:10] + '_' + file)
+            date = str(datetime.datetime.fromtimestamp(creation_time))[:10]
+            
+        # rename the file
+        os.rename(file, date + '_' + file)
