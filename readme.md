@@ -4,10 +4,10 @@ Alternatively, a custom date can be set.
 
 usage: filename_date.exe [-h] [-t] [-c CUSTOM]
 
-options:
-  -h, --help            show this help message and exit
-  -t, --today           set the current date
-  -c CUSTOM, --custom CUSTOM
+options:  
+  -h, --help            show this help message and exit  
+  -t, --today           set the current date  
+  -c CUSTOM, --custom CUSTOM  
                         specify the date in the filename, YYYY-MM-DD
   
-Authors: Dr. Gerrit Nowald & Github Copilot.
+Author: Gerrit Nowald
